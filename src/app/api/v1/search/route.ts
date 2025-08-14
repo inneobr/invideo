@@ -11,12 +11,12 @@ export async function GET(req: NextRequest) {
     if (!query) {
       return NextResponse.json({ error: 'Parâmetro de busca ausente' }, { status: 400 });
     }
-    const cacheKey = `search:${query.trim().toLowerCase()}`;
+   /* const cacheKey = `search:${query.trim().toLowerCase()}`;
 
     const videoCache = await redis.get(cacheKey);
     if (videoCache) {
       return NextResponse.json(JSON.parse(videoCache), { status: 200 });
-    }
+    }*/
 
     const url = `https://superflixapi.digital/pesquisar/?sort=&s=${encodeURIComponent(query)}`;
     const { data: html } = await axios.get(url);
@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
         results.push({ title, image, pageLink });
       }
     });
-    await redis.set(cacheKey, JSON.stringify({ results }), 'EX', 3600);
+    //await redis.set(cacheKey, JSON.stringify({ results }), 'EX', 3600);
     return NextResponse.json({ results }, { status: 200 });
   } catch (error: any) {
     console.error('Erro ao fazer scraping:', error.message);
