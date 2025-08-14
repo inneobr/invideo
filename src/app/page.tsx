@@ -27,6 +27,7 @@ export default function Home() {
     
         try {
           const res = await fetch(`/api/v1/search?query=${encodeURIComponent(query.trim())}`);
+
           if (!res.ok) throw new Error(`Erro na busca: ${res.statusText}`);
     
           const data: ApiResponse = await res.json();
