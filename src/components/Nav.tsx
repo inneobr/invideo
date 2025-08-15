@@ -8,10 +8,6 @@ const rotas =[
         name: "Explorar",
         path: "/"
     },
-    {
-        name: "Histórico",
-        path: "/historico"
-    },
 ]
 
 const Nav = () => {
